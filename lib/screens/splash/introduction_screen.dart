@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/common/sizedbox.dart';
+import 'package:moovbe_bus/screens/login/login_screen.dart';
+import 'package:moovbe_bus/screens/widgets/custom_textbutton.dart';
 
 class IntroductionScreen extends StatelessWidget {
   const IntroductionScreen({super.key});
@@ -21,27 +22,17 @@ class IntroductionScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 58,
-            width: MediaQuery.of(context).size.width * .8,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                elevation: 0,
-                backgroundColor: Colors.white,
-                foregroundColor: AppColor.themePimaryColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onPressed: () {},
-              child: Text(
-                'Get Started',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18,
-                ),
-              ),
-            ),
+          CustomTextButton(
+            backgroundColor: AppColor.white,
+            foregroundColor: AppColor.themePimaryColor,
+            onPressed: () {
+              Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                builder: (context) {
+                  return const LoginScreen();
+                },
+              ), (route) => false);
+            },
+            text: 'Get Started',
           ),
           KSizedBox.kheight20
         ],

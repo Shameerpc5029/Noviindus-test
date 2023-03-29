@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/screens/splash/introduction_screen.dart';
 
 void main() {
@@ -14,6 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            toolbarHeight: 100,
+            backgroundColor: AppColor.themSecondaryColor,
+          ),
           fontFamily: 'Axiforma',
         ),
         debugShowCheckedModeBanner: false,
