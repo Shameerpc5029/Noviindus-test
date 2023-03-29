@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         theme: ThemeData(
           appBarTheme: AppBarTheme(
+            centerTitle: true,
             toolbarHeight: 100,
             backgroundColor: AppColor.themSecondaryColor,
           ),

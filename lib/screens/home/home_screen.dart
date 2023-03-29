@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/common/sizedbox.dart';
+import 'package:moovbe_bus/screens/bus_details/bus_details_screen.dart';
+import 'package:moovbe_bus/screens/driver_list/driver_list_screen.dart';
 import 'package:moovbe_bus/screens/home/widgets/custom_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -10,7 +12,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: const Image(
             height: 40,
             image: AssetImage(
@@ -37,6 +38,13 @@ class HomeScreen extends StatelessWidget {
                     subTitle: 'Manage your Driver',
                     image: 'assets/images/driver.png',
                     cardColor: AppColor.themSecondaryColor,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const DriverListScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -83,7 +91,11 @@ class HomeScreen extends StatelessWidget {
                             elevation: 0,
                             backgroundColor: AppColor.themePimaryColor,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const BusDetailsScreen(),
+                            ));
+                          },
                           child: const Text(
                             'Manage',
                           )),

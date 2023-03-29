@@ -16,7 +16,7 @@ class TextFormfieldWidegt extends StatelessWidget {
       keyboardType: inputType,
       textAlign: TextAlign.center,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(18),
+        contentPadding: const EdgeInsets.all(18),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide.none,

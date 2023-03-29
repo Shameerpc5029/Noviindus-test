@@ -46,16 +46,16 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  TextFormfieldWidegt(
+                  const TextFormfieldWidegt(
                     hintText: 'Enter Username',
                     inputType: TextInputType.emailAddress,
                   ),
                   KSizedBox.kheight20,
-                  TextFormfieldWidegt(
+                  const TextFormfieldWidegt(
                     hintText: 'Enter Password',
                     inputType: TextInputType.visiblePassword,
                   ),
@@ -66,14 +66,14 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(right: 20),
+        padding: const EdgeInsets.only(right: 20),
         child: CustomTextButton(
           backgroundColor: AppColor.themePimaryColor,
           foregroundColor: AppColor.white,
           onPressed: () {
             Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
               builder: (context) {
-                return HomeScreen();
+                return const HomeScreen();
               },
             ), (route) => false);
           },
