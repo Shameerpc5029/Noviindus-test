@@ -10,4 +10,7 @@ class KSizedBox {
   static SizedBox kheight30 = const SizedBox(
     height: 30,
   );
+  static SizedBox kwidth10 = SizedBox(
+    width: 10,
+  );
 }

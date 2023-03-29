@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/common/sizedbox.dart';
 
-class BusDetailsScreen extends StatelessWidget {
-  const BusDetailsScreen({super.key});
+class BusDetailsScreen2 extends StatelessWidget {
+  const BusDetailsScreen2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -80,9 +80,9 @@ class BusDetailsScreen extends StatelessWidget {
                       return Row(
                         children: [
                           Image.asset('assets/images/Seat red.png'),
-                          KSizedBox.kwidth10,
-                          Image.asset('assets/images/Seat red.png'),
                           const Spacer(),
+                          Image.asset('assets/images/Seat red.png'),
+                          KSizedBox.kwidth10,
                           Image.asset('assets/images/Seat red.png'),
                           KSizedBox.kwidth10,
                           Image.asset('assets/images/Seat red.png'),

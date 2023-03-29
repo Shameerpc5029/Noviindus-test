@@ -13,7 +13,7 @@ class CustomCard extends StatelessWidget {
 
   final String title;
   final String subTitle;
-  final String image;
+  final Widget image;
   final Color cardColor;
   final void Function()? onTap;
   @override
@@ -29,7 +29,7 @@ class CustomCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width / 2.4,
             decoration: BoxDecoration(
               color: cardColor,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,10 +53,7 @@ class CustomCard extends StatelessWidget {
               ],
             ),
           ),
-          Image(
-            fit: BoxFit.cover,
-            image: AssetImage(image),
-          )
+          image,
         ],
       ),
     );

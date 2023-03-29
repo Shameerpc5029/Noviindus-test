@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/common/sizedbox.dart';
 import 'package:moovbe_bus/screens/bus_details/bus_details_screen.dart';
+import 'package:moovbe_bus/screens/bus_details/bus_details_screen2.dart';
 import 'package:moovbe_bus/screens/driver_list/driver_list_screen.dart';
 import 'package:moovbe_bus/screens/home/widgets/custom_card.dart';
 
@@ -30,19 +31,25 @@ class HomeScreen extends StatelessWidget {
                   CustomCard(
                     title: 'Bus',
                     subTitle: 'Manage your Bus',
-                    image: 'assets/images/bus.png',
+                    image: Image(
+                      image: AssetImage('assets/images/bus.png'),
+                    ),
                     cardColor: AppColor.themePimaryColor,
                   ),
                   CustomCard(
                     title: 'Driver',
                     subTitle: 'Manage your Driver',
-                    image: 'assets/images/driver.png',
+                    image: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child:
+                          Image(image: AssetImage('assets/images/driver.png')),
+                    ),
                     cardColor: AppColor.themSecondaryColor,
                     onTap: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const DriverListScreen(),
-                        ),
+                        MaterialPageRoute(builder: (context) {
+                          return const DriverListScreen();
+                        }),
                       );
                     },
                   ),
@@ -93,7 +100,9 @@ class HomeScreen extends StatelessWidget {
                           ),
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const BusDetailsScreen(),
+                              builder: (context) => index.isOdd
+                                  ? const BusDetailsScreen()
+                                  : const BusDetailsScreen2(),
                             ));
                           },
                           child: const Text(
