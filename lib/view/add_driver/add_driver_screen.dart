@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/common/sizedbox.dart';
-import 'package:moovbe_bus/screens/widgets/custom_textbutton.dart';
-import 'package:moovbe_bus/screens/widgets/textformfield_widget.dart';
+import 'package:moovbe_bus/view/widgets/custom_textbutton.dart';
+import 'package:moovbe_bus/view/widgets/textformfield_widget.dart';
 
 class AddDriverScreen extends StatelessWidget {
   const AddDriverScreen({super.key});
@@ -19,14 +19,16 @@ class AddDriverScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Column(
           children: [
-            const TextFormfieldWidegt(
+            TextFormfieldWidegt(
               hintText: 'Enter Name',
               inputType: TextInputType.name,
+              controller: TextEditingController(),
             ),
             KSizedBox.kheight20,
-            const TextFormfieldWidegt(
+            TextFormfieldWidegt(
               hintText: 'Enter License Number',
               inputType: TextInputType.name,
+              controller: TextEditingController(),
             )
           ],
         ),

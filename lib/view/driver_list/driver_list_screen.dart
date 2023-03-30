@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/common/sizedbox.dart';
-import 'package:moovbe_bus/screens/add_driver/add_driver_screen.dart';
-
-import 'package:moovbe_bus/screens/widgets/custom_textbutton.dart';
+import 'package:moovbe_bus/view/add_driver/add_driver_screen.dart';
+import 'package:moovbe_bus/view/widgets/custom_textbutton.dart';
 
 class DriverListScreen extends StatelessWidget {
   const DriverListScreen({super.key});

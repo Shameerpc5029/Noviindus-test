@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
 
 import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/common/sizedbox.dart';
 
-class BusDetailsScreen2 extends StatelessWidget {
-  const BusDetailsScreen2({super.key});
+class BusDetailsScreen extends StatelessWidget {
+  const BusDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +48,7 @@ class BusDetailsScreen2 extends StatelessWidget {
                       ),
                     ],
                   ),
+                  KSizedBox.kheight20,
                   const SizedBox(
                     width: 100,
                     child: Image(
@@ -59,7 +61,7 @@ class BusDetailsScreen2 extends StatelessWidget {
             KSizedBox.kheight20,
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-              width: 300,
+              width: MediaQuery.of(context).size.width * .7,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
@@ -72,7 +74,7 @@ class BusDetailsScreen2 extends StatelessWidget {
                   const Image(
                     image: AssetImage('assets/images/Seat black.png'),
                   ),
-                  KSizedBox.kheight10,
+                  KSizedBox.kheight20,
                   ListView.separated(
                     shrinkWrap: true,
                     physics: const ScrollPhysics(),
@@ -81,9 +83,9 @@ class BusDetailsScreen2 extends StatelessWidget {
                       return Row(
                         children: [
                           Image.asset('assets/images/Seat red.png'),
-                          const Spacer(),
-                          Image.asset('assets/images/Seat red.png'),
                           KSizedBox.kwidth10,
+                          Image.asset('assets/images/Seat red.png'),
+                          const Spacer(),
                           Image.asset('assets/images/Seat red.png'),
                           KSizedBox.kwidth10,
                           Image.asset('assets/images/Seat red.png'),

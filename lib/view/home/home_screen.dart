@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/common/sizedbox.dart';
-import 'package:moovbe_bus/screens/bus_details/bus_details_screen.dart';
-import 'package:moovbe_bus/screens/bus_details/bus_details_screen2.dart';
-import 'package:moovbe_bus/screens/driver_list/driver_list_screen.dart';
-import 'package:moovbe_bus/screens/home/widgets/custom_card.dart';
+import 'package:moovbe_bus/view/bus_details/bus_details_screen.dart';
+import 'package:moovbe_bus/view/bus_details/bus_details_screen2.dart';
+
+import 'package:moovbe_bus/view/driver_list/driver_list_screen.dart';
+import 'package:moovbe_bus/view/home/widgets/custom_card.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,10 +15,11 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Image(
-            height: 40,
-            image: AssetImage(
-              'assets/images/logo.png',
-            )),
+          height: 40,
+          image: AssetImage(
+            'assets/images/logo.png',
+          ),
+        ),
       ),
       body: Scaffold(
         body: SingleChildScrollView(
@@ -73,7 +75,10 @@ class HomeScreen extends StatelessWidget {
                         color: const Color(0xFFC2C2C2).withOpacity(0.3),
                       ),
                       boxShadow: const [
-                        BoxShadow(color: Color(0xFFC2C2C2), blurRadius: 3)
+                        BoxShadow(
+                          color: Color(0xFFC2C2C2),
+                          blurRadius: 3,
+                        )
                       ],
                     ),
                     height: 73,
@@ -99,11 +104,13 @@ class HomeScreen extends StatelessWidget {
                         const Spacer(),
                         InkWell(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => index.isOdd
-                                  ? const BusDetailsScreen()
-                                  : const BusDetailsScreen2(),
-                            ));
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => index.isOdd
+                                    ? const BusDetailsScreen()
+                                    : const BusDetailsScreen2(),
+                              ),
+                            );
                           },
                           child: Container(
                             width: 70,
