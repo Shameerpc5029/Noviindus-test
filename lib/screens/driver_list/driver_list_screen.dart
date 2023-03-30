@@ -21,37 +21,73 @@ class DriverListScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text("21 Drivers Found"),
+            KSizedBox.kheight20,
             ListView.separated(
               physics: const ScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return Material(
-                  elevation: 3,
-                  shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide.none,
-                  ),
-                  child: ListTile(
-                    tileColor: Colors.white,
-                    leading: const CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/person.png'),
+                return Container(
+                  margin: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: AppColor.white,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: const Color(0xFFC2C2C2).withOpacity(0.3),
                     ),
-                    title: const Text('Rohit sharma'),
-                    subtitle: const Text('Lic no: NKDSGIJ978'),
-                    trailing: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                          backgroundColor: AppColor.themePimaryColor,
+                    boxShadow: const [
+                      BoxShadow(color: Color(0xFFC2C2C2), blurRadius: 3)
+                    ],
+                  ),
+                  height: 73,
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 73,
+                        width: 79,
+                        decoration: BoxDecoration(
+                          color: AppColor.greyColor,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10),
+                          ),
                         ),
-                        onPressed: () {},
-                        child: const Text(
-                          'Delete',
-                        )),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CircleAvatar(
+                            backgroundImage:
+                                AssetImage('assets/images/person.png'),
+                          ),
+                        ),
+                      ),
+                      KSizedBox.kwidth5,
+                      const SizedBox(
+                        width: 148,
+                        child: Text('Rohit sharma\nLicn no: PJ5151961616'),
+                      ),
+                      const Spacer(),
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          width: 70,
+                          height: 30,
+                          margin: const EdgeInsets.only(right: 10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: AppColor.themePimaryColor,
+                          ),
+                          child: Center(
+                              child: Text(
+                            'Delete',
+                            style: TextStyle(color: AppColor.white),
+                          )),
+                        ),
+                      )
+                    ],
                   ),
                 );
               },
               separatorBuilder: (context, index) => KSizedBox.kheight10,
-              itemCount: 5,
+              itemCount: 4,
             ),
           ],
         ),

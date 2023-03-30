@@ -24,6 +24,7 @@ class BusDetailsScreen2 extends StatelessWidget {
               ),
               width: double.infinity,
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                   CustomCard(
                     title: 'Bus',
                     subTitle: 'Manage your Bus',
-                    image: Image(
+                    image: const Image(
                       image: AssetImage('assets/images/bus.png'),
                     ),
                     cardColor: AppColor.themePimaryColor,
@@ -39,8 +39,8 @@ class HomeScreen extends StatelessWidget {
                   CustomCard(
                     title: 'Driver',
                     subTitle: 'Manage your Driver',
-                    image: Padding(
-                      padding: const EdgeInsets.only(right: 10),
+                    image: const Padding(
+                      padding: EdgeInsets.only(right: 10),
                       child:
                           Image(image: AssetImage('assets/images/driver.png')),
                     ),
@@ -64,51 +64,63 @@ class HomeScreen extends StatelessWidget {
                 physics: const ScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return Material(
-                    borderRadius: BorderRadius.circular(10),
-                    elevation: 1,
-                    child: ListTile(
-                      tileColor: Colors.white,
-                      contentPadding: const EdgeInsets.only(right: 10),
-                      leading: Container(
-                        color: AppColor.greyColor,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 10),
-                        child: const Image(
-                          fit: BoxFit.fill,
-                          image: AssetImage('assets/images/bus 2.png'),
-                        ),
+                  return Container(
+                    margin: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: AppColor.white,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: const Color(0xFFC2C2C2).withOpacity(0.3),
                       ),
-                      title: const Text(
-                        'KSRTC',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w300,
-                          fontSize: 12,
-                        ),
-                      ),
-                      subtitle: const Text(
-                        'swift Scania p- serius',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            fontSize: 12,
-                            color: Colors.black),
-                      ),
-                      trailing: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            elevation: 0,
-                            backgroundColor: AppColor.themePimaryColor,
+                      boxShadow: const [
+                        BoxShadow(color: Color(0xFFC2C2C2), blurRadius: 3)
+                      ],
+                    ),
+                    height: 73,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 73,
+                          width: 79,
+                          decoration: BoxDecoration(
+                            color: AppColor.greyColor,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
                           ),
-                          onPressed: () {
+                          child: Image.asset('assets/images/bus 2.png'),
+                        ),
+                        KSizedBox.kwidth5,
+                        const SizedBox(
+                          width: 148,
+                          child: Text('KSRTC\nSwift Scania P-series'),
+                        ),
+                        const Spacer(),
+                        InkWell(
+                          onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => index.isOdd
                                   ? const BusDetailsScreen()
                                   : const BusDetailsScreen2(),
                             ));
                           },
-                          child: const Text(
-                            'Manage',
-                          )),
-                      onTap: () {},
+                          child: Container(
+                            width: 70,
+                            height: 30,
+                            margin: const EdgeInsets.only(right: 10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(4),
+                              color: AppColor.themePimaryColor,
+                            ),
+                            child: Center(
+                                child: Text(
+                              'Manage',
+                              style: TextStyle(color: AppColor.white),
+                            )),
+                          ),
+                        )
+                      ],
                     ),
                   );
                 },
