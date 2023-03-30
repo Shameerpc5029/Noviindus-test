@@ -1,56 +1,81 @@
-import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:moovbe_bus/common/colors.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:moovbe_bus/common/api/base_url.dart';
+import 'package:moovbe_bus/common/api/endpoints.dart';
+import 'package:moovbe_bus/utils/exeptions/dio_exceptions.dart';
 
-class DioException implements Exception {
-  void dioError(Object e) {
-    if (e is DioError) {
-      if (e.response?.statusCode == 401) {
-        AppToast.showToast('Invalid input', AppColor.alertColor);
-      } else if (e.response?.statusCode == 400) {
-        AppToast.showToast('Unknown fieldt', AppColor.alertColor);
-      } else if (e.response?.statusCode == 403) {
-        AppToast.showToast(
-            'User credential is not working', AppColor.alertColor);
-      } else if (e.toString() ==
-          "[Error]: (006) Request Throttled. Over Rate limit: up to 2 per sec. See geocode.xyz/pricing") {
-        AppToast.showToast('Failed, Please try again', AppColor.alertColor);
-      }
-    }
-    if (e is SocketException) {
-      log('No Internet');
-      AppToast.showToast('No Internet Connection', AppColor.alertColor);
-    }
-    if (e is TimeoutException) {
-      AppToast.showToast('Connection Timeout', AppColor.alertColor);
-    }
-    if (e is MissingPluginException) {
-      AppToast.showToast('Plugin error occured', AppColor.alertColor);
-    }
-    if (e is PlatformException) {
-      AppToast.showToast('Platform Error Occured', AppColor.alertColor);
-    }
-  }
-}
+class IntercepterApi {
+  FlutterSecureStorage storage = const FlutterSecureStorage();
+  Dio dio = Dio();
 
-class AppToast {
-  static Future<void> showToast(
-    String msg,
-    Color color, [
-    ToastGravity gravity = ToastGravity.SNACKBAR,
-    Toast toastLength = Toast.LENGTH_SHORT,
-  ]) async {
-    await Fluttertoast.cancel();
-    await Fluttertoast.showToast(
-      msg: msg,
-      backgroundColor: color,
-      toastLength: toastLength,
+  Future<Dio> getApiUser() async {
+    dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final token = await storage.read(key: 'token');
+          dio.interceptors.clear();
+          options.headers.addAll({"Authorization": "Bearer $token"});
+          return handler.next(options);
+        },
+        onResponse: (response, handler) {
+          return handler.next(response);
+        },
+        onError: (DioError e, handler) async {
+          if (e.response != null) {
+            if (e.response?.statusCode == 403 &&
+                e.response?.data['message'] == 'Forbidden') {
+              log('token expired');
+              RequestOptions requestOptions = e.requestOptions;
+              try {
+                final refreshToken = await storage.read(key: 'refreshToken');
+                log(refreshToken.toString());
+                final opts = Options(method: requestOptions.method);
+                dio.options.headers["refresh"] = "Bearer $refreshToken";
+                final Response response = await dio.get(
+                  BaseUrl.baseUrl + Endpoints.refresh,
+                  options: opts,
+                );
+                if (response.statusCode! == 200) {
+                  log(response.data.toString());
+                  final token = response.data['accessToken'];
+                  final refreshToken = response.data['refreshToken'];
+                  await storage.delete(key: 'token');
+                  await storage.delete(key: 'refreshToken');
+                  storage.write(key: 'token', value: token);
+                  storage.write(key: 'refreshToken', value: refreshToken);
+                }
+              } catch (e) {
+                DioException().dioError(
+                  e,
+                );
+              }
+              try {
+                final token = await storage.read(key: 'token');
+                final opts = Options(method: requestOptions.method);
+                dio.options.headers["Authorization"] = "Bearer $token";
+                final response = await dio.request(
+                  requestOptions.path,
+                  options: opts,
+                  cancelToken: requestOptions.cancelToken,
+                  onReceiveProgress: requestOptions.onReceiveProgress,
+                  data: requestOptions.data,
+                  queryParameters: requestOptions.queryParameters,
+                );
+                return handler.resolve(response);
+              } catch (e) {
+                DioException().dioError(
+                  e,
+                );
+              }
+            }
+          } else {
+            handler.next(e);
+          }
+        },
+      ),
     );
+    return dio;
   }
 }

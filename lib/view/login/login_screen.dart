@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/common/sizedbox.dart';
 import 'package:moovbe_bus/controller/login/login_controller.dart';
-import 'package:moovbe_bus/view/home/home_screen.dart';
 import 'package:moovbe_bus/view/widgets/custom_textbutton.dart';
 import 'package:moovbe_bus/view/widgets/textformfield_widget.dart';
 import 'package:provider/provider.dart';
 
+final GlobalKey<FormState> formGlobalKey = GlobalKey<FormState>();
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> formGlobalKey = GlobalKey<FormState>();
     final screenSize = MediaQuery.of(context);
     return Consumer<LoginController>(
       builder: (context, value, child) {

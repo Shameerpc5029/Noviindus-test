@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moovbe_bus/common/colors.dart';
+import 'package:moovbe_bus/controller/driver_list/driver_list_controller.dart';
 import 'package:moovbe_bus/controller/login/login_controller.dart';
 import 'package:moovbe_bus/view/introduction/introduction_screen.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => LoginController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => DriverListController(),
         )
       ],
       child: MaterialApp(
