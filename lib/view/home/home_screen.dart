@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
               ),
               KSizedBox.kheight20,
               const Text(
-                '21 Buses Found',
+                '4 Buses Found',
               ),
               KSizedBox.kheight20,
               ListView.separated(
@@ -131,7 +131,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   );
                 },
-                itemCount: 10,
+                itemCount: 4,
                 separatorBuilder: (BuildContext context, int index) {
                   return KSizedBox.kheight10;
                 },

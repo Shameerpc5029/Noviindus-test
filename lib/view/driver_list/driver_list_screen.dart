@@ -182,8 +182,8 @@ class ShowAlertDialogWidget extends StatelessWidget {
             style: TextButton.styleFrom(
               textStyle: Theme.of(context).textTheme.labelLarge,
             ),
-            child: const Text('Yes'),
             onPressed: onPressed,
+            child: const Text('Yes'),
           ),
         ]);
   }
