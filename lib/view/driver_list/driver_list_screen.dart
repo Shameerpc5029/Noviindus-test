@@ -27,109 +27,102 @@ class DriverListScreen extends StatelessWidget {
                 ? const Center(
                     child: CircularProgressIndicator(),
                   )
-                : value.model!.driverList.isEmpty
-                    ? const Text('No Drivers')
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                              "${value.model!.driverList.length.toInt()} Drivers Found"),
-                          KSizedBox.kheight20,
-                          ListView.separated(
-                            physics: const ScrollPhysics(),
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: const EdgeInsets.all(5),
-                                decoration: BoxDecoration(
-                                  color: AppColor.white,
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    color: const Color(0xFFC2C2C2)
-                                        .withOpacity(0.3),
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                          "${value.model?.driverList.length.toInt()} Drivers Found"),
+                      KSizedBox.kheight20,
+                      ListView.separated(
+                        physics: const ScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              color: AppColor.white,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: const Color(0xFFC2C2C2).withOpacity(0.3),
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color(0xFFC2C2C2),
+                                  blurRadius: 3,
+                                )
+                              ],
+                            ),
+                            height: 73,
+                            child: Row(
+                              children: [
+                                Container(
+                                  height: 73,
+                                  width: 79,
+                                  decoration: BoxDecoration(
+                                    color: AppColor.greyColor,
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(10),
+                                      bottomLeft: Radius.circular(10),
+                                    ),
                                   ),
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Color(0xFFC2C2C2),
-                                      blurRadius: 3,
-                                    )
-                                  ],
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: CircleAvatar(
+                                      backgroundImage: AssetImage(
+                                          'assets/images/person.png'),
+                                    ),
+                                  ),
                                 ),
-                                height: 73,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      height: 73,
-                                      width: 79,
-                                      decoration: BoxDecoration(
-                                        color: AppColor.greyColor,
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(10),
-                                          bottomLeft: Radius.circular(10),
-                                        ),
-                                      ),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: CircleAvatar(
-                                          backgroundImage: AssetImage(
-                                              'assets/images/person.png'),
-                                        ),
-                                      ),
-                                    ),
-                                    KSizedBox.kwidth5,
-                                    SizedBox(
-                                      width: 148,
-                                      child: Text(
-                                          '${value.model!.driverList[index].name}\nLicn no: ${value.model!.driverList[index].licenseNo}'),
-                                    ),
-                                    const Spacer(),
-                                    InkWell(
-                                      onTap: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return ShowAlertDialogWidget(
-                                              text:
-                                                  'Do you want to remove ${value.model!.driverList[index].name}',
-                                              onPressed: () {
-                                                value.removeDriver(
-                                                  context,
-                                                  value.model!.driverList[index]
-                                                      .id,
-                                                );
-                                              },
+                                KSizedBox.kwidth5,
+                                SizedBox(
+                                  width: 148,
+                                  child: Text(
+                                      '${value.model!.driverList[index].name}\nLicn no: ${value.model!.driverList[index].licenseNo}'),
+                                ),
+                                const Spacer(),
+                                InkWell(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return ShowAlertDialogWidget(
+                                          text:
+                                              'Do you want to remove ${value.model!.driverList[index].name}',
+                                          onPressed: () {
+                                            value.removeDriver(
+                                              context,
+                                              value.model!.driverList[index].id,
                                             );
                                           },
                                         );
                                       },
-                                      child: Container(
-                                        width: 70,
-                                        height: 30,
-                                        margin:
-                                            const EdgeInsets.only(right: 10),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          color: AppColor.themePimaryColor,
-                                        ),
-                                        child: Center(
-                                            child: Text(
-                                          'Delete',
-                                          style:
-                                              TextStyle(color: AppColor.white),
-                                        )),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, index) =>
-                                KSizedBox.kheight10,
-                            itemCount: value.model?.driverList.length ?? 0,
-                          ),
-                        ],
-                      );
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 70,
+                                    height: 30,
+                                    margin: const EdgeInsets.only(right: 10),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(4),
+                                      color: AppColor.themePimaryColor,
+                                    ),
+                                    child: Center(
+                                        child: Text(
+                                      'Delete',
+                                      style: TextStyle(color: AppColor.white),
+                                    )),
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) =>
+                            KSizedBox.kheight10,
+                        itemCount: value.model?.driverList.length ?? 0,
+                      ),
+                    ],
+                  );
           },
         ),
       ),
