@@ -54,4 +54,26 @@ class DriverListService {
     }
     return null;
   }
+
+  Future<String?> removeDriver(urlId, id) async {
+    Dio dio = await IntercepterApi().getApiUser();
+    try {
+      final Response response = await dio.delete(
+        BaseUrl.baseUrl + Endpoints.driverList + urlId,
+        data: {
+          "driver_id": id,
+        },
+      );
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        final remove = response.data['message'];
+        return remove;
+      }
+    } catch (e) {
+      log(e.toString());
+      DioException().dioError(
+        e,
+      );
+    }
+    return null;
+  }
 }

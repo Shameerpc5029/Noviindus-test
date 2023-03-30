@@ -6,6 +6,8 @@ import 'package:moovbe_bus/view/widgets/custom_textbutton.dart';
 import 'package:moovbe_bus/view/widgets/textformfield_widget.dart';
 import 'package:provider/provider.dart';
 
+final GlobalKey<FormState> formGlobalKey = GlobalKey<FormState>();
+
 class AddDriverScreen extends StatelessWidget {
   const AddDriverScreen({super.key});
 
@@ -21,20 +23,29 @@ class AddDriverScreen extends StatelessWidget {
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-            child: Column(
-              children: [
-                TextFormfieldWidegt(
-                  hintText: 'Enter Name',
-                  inputType: TextInputType.name,
-                  controller: value.name,
-                ),
-                KSizedBox.kheight20,
-                TextFormfieldWidegt(
-                  hintText: 'Enter License Number',
-                  inputType: TextInputType.name,
-                  controller: value.licenseNo,
-                )
-              ],
+            child: Form(
+              key: formGlobalKey,
+              child: Column(
+                children: [
+                  TextFormfieldWidegt(
+                    validator: (p0) {
+                      return value.nameValidation(p0);
+                    },
+                    hintText: 'Enter Name',
+                    inputType: TextInputType.name,
+                    controller: value.name,
+                  ),
+                  KSizedBox.kheight20,
+                  TextFormfieldWidegt(
+                    validator: (p0) {
+                      return value.licNumeberValidation(p0);
+                    },
+                    hintText: 'Enter License Number',
+                    inputType: TextInputType.name,
+                    controller: value.licenseNo,
+                  )
+                ],
+              ),
             ),
           ),
           floatingActionButton: Padding(
@@ -43,7 +54,10 @@ class AddDriverScreen extends StatelessWidget {
               backgroundColor: AppColor.themePimaryColor,
               foregroundColor: AppColor.white,
               onPressed: () {
-               value.addDriver( context);
+                if (formGlobalKey.currentState!.validate()) {
+                  formGlobalKey.currentState!.save();
+                  value.addDriver(context);
+                }
               },
               text: 'Save',
             ),

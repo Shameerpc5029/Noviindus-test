@@ -1,33 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// class DriverList {
-//   DriverList({
-//     required this.id,
-//     required this.name,
-//     required this.mobile,
-//     required this.licenseNo,
-//   });
-
-//   dynamic id;
-//   dynamic name;
-//   dynamic mobile;
-//   dynamic licenseNo;
-
-//   factory DriverList.fromJson(Map<String, dynamic> json) => DriverList(
-//         id: json["id"],
-//         name: json["name"],
-//         mobile: json["mobile"],
-//         licenseNo: json["license_no"],
-//       );
-
-//   Map<String, dynamic> toJson() => {
-//         "id": id,
-//         "name": name,
-//         "mobile": mobile,
-//         "license_no": licenseNo,
-//       };
-// }
-
 class DriverListModel {
   DriverListModel({
     required this.status,
@@ -58,7 +28,7 @@ class DriverList {
     required this.licenseNo,
   });
 
-  int? id;
+  int id;
   String? name;
   String? mobile;
   String? licenseNo;

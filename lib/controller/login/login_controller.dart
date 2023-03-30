@@ -23,7 +23,7 @@ class LoginController extends ChangeNotifier {
       if (value != null) {
         await storage.write(key: 'token', value: value.access);
         await storage.write(key: 'refresh', value: value.urlId);
-        print(value.urlId.toString());
+
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (context) => const HomeScreen(),

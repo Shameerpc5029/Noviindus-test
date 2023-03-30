@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:moovbe_bus/common/colors.dart';
 import 'package:moovbe_bus/model/driver_list/add_driver_model.dart';
 import 'package:moovbe_bus/model/driver_list/driver_list_model.dart';
 
@@ -66,6 +67,39 @@ class DriverListController extends ChangeNotifier {
         null;
       }
     });
+  }
+
+  void removeDriver(context, driverId) async {
+    final urlId = await storage.read(key: 'refresh');
+
+    DriverListService().removeDriver("$urlId/", driverId).then((value) {
+      if (value != null) {
+        getAllDrivers();
+
+        AppToast.showToast(
+          'Driver removed Successfully',
+          AppColor.alertColor,
+        ).then((value) => Navigator.pop(context));
+
+        notifyListeners();
+      } else {
+        return;
+      }
+    });
+  }
+
+  String? nameValidation(String? value) {
+    if (value!.isEmpty) {
+      return "Please enter Name";
+    }
+    return null;
+  }
+
+  String? licNumeberValidation(String? value) {
+    if (value!.isEmpty) {
+      return "Please enter License Number";
+    }
+    return null;
   }
 
   void clearFiled() {
